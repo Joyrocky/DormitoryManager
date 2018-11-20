@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.dao.DormitoryDao" >
+
+    <!--分页查询-->
+    <select id="getDormitoryList" parameterType="Dormitory" resultType="Dormitory">
+        select *from d_dormitoryinfo
+        <where>
+            <if test="d_name!=null and d_name!='' ">
+                and  d_name like  '%${d_name}%'
+            </if>
+            <if test="a_name!=null and a_name!=''">
+                and  a_name like  '%${a_name}%'
+            </if>
+            <if test="s_dormitoryid!=null and s_dormitoryid!=0">
+                and  s_dormitoryid like  '%${s_dormitoryid}%'
+            </if>
+        </where>
+        ORDER BY  d_id asc
+        limit #{currentPage},#{pageSize}
+    </select>
+    <!--查询数据总数-->
+    <select id="totalCount"  resultType="Integer">
+        select count(s_dormitoryid) from d_dormitoryinfo
+        <where>
+            <if test="d_name!=null and d_name!='' ">
+                and  d_name like  '%${d_name}%'
+            </if>
+            <if test="a_name!=null and a_name!=''">
+                and  a_name like  '%${a_name}%'
+            </if>
+            <if test="s_dormitoryid!=null and s_dormitoryid!=0">
+                and  s_dormitoryid like  '%${s_dormitoryid}%'
+            </if>
+          </where>
+    </select>
+
+    <!--添加宿舍信息-->
+    <insert id="addDormitory" parameterType="Dormitory" keyProperty="d_id" useGeneratedKeys="true">
+        insert into d_dormitoryinfo (s_dormitoryid,d_name,d_bedtotal,d_bed,a_name)
+        values(#{s_dormitoryid},#{d_name},#{d_bedtotal},#{d_bed},#{a_name})
+    </insert>
+
+    <!--通过id删除宿舍信息-->
+    <delete id="deleteDormitory" parameterType="Integer" >
+        delete from d_dormitoryinfo where d_id=#{d_id}
+    </delete>
+
+    <select id="findDormitoryById"  parameterType="Integer" resultType="Dormitory" >
+        select * from d_dormitoryinfo where d_id=#{d_id}
+    </select>
+    <!--修改宿舍信息-->
+    <update id="updateDormitory" parameterType="Dormitory">
+        update d_dormitoryinfo
+        <set>
+            <if test="s_dormitoryid!=null and s_dormitoryid!=0">
+                s_dormitoryid=#{s_dormitoryid},
+            </if>
+            <if test="d_name !=null and d_name !=''">
+                d_name=#{d_name},
+            </if>
+            <if test="d_bedtotal !=null and d_bedtotal !=''">
+                d_bedtotal=#{d_bedtotal},
+            </if>
+            <if test="d_bed !=null and d_bed !=''">
+                d_bed=#{d_bed},
+            </if>
+            <if test="a_name !=null and a_name !=''">
+                a_name=#{a_name},
+            </if>
+        </set>
+        where d_id = #{d_id}
+    </update>
+
+    <!--宿舍人员信息查询信息-->
+    <resultMap type="com.itheima.po.Dormitory" id="cardAndInfo2">
+        <id property="s_dormitoryid" column="s_dormitoryid"/>
+        <result property="d_name" column="d_name"/>
+        <result property="d_bedtotal" column="d_bedtotal"/>
+        <result property="d_bed" column="d_bed"/>
+        <result property="a_name" column="a_name"/>
+        <association property="students" javaType="Student" >
+            <id property="s_studentid" column="s_studentid"/>
+            <result property="s_name" column="s_name"/>
+            <result property="s_sex" column="s_sex"/>
+            <result property="s_age" column="s_age"/>
+            <result property="s_phone" column="s_phone"/>
+            <result property="s_classid" column="s_classid"/>
+            <result property="s_dormitoryid" column="s_dormitoryid"/>
+        </association>
+    </resultMap>
+
+    <select id="findDormitoryStudent" parameterType="Dormitory" resultMap="cardAndInfo2">
+        SELECT dormitoryinfos.*,students.*
+        FROM d_dormitoryinfo dormitoryinfos,d_student students
+--         WHERE dormitoryinfos.s_dormitoryid = students.s_dormitoryid
+--         and dormitoryinfos.s_dormitoryid like '${s_dormitoryid}'
+
+        <where>
+            <if test="dormitoryinfos.s_dormitoryid!=null and dormitoryinfos.s_dormitoryid = students.s_dormitoryid ">
+                and  dormitoryinfos.s_dormitoryid  like  '${s_dormitoryid}'
+            </if>
+        </where>
+    </select>
+
+
+
+
+
+</mapper>

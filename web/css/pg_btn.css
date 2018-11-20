@@ -1,0 +1,54 @@
+/*分页按钮样式*/
+.page-go-form{
+    float: right;
+    margin-right: 40px;
+    width: 200px;
+}
+
+.page-bar{
+    width: 600px;
+    height: 30px;
+    float: right;
+}
+.page-num-ul{
+    width: 250px;
+    height: 30px;
+    padding-left: 100px;
+    float: left;
+    font-size: 14px;
+}
+.pg_a{
+    margin: 0 5px;
+}
+.pg_a:hover{
+    color: #00a4ac;
+    margin: 0 5px;
+}
+#inputPage{
+    width: 50px;
+}
+.page-btn{
+    margin: 0 3px;
+    width: 50px;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #009688;
+}
+.page-btn:hover{
+    opacity: 0.7;
+    cursor: pointer;
+    background-color: #009688;
+}
+
+#f_auto{
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 400px;
+}
+#btn_on{
+    width: 260px;
+    margin-left: 45px;
+}
+.f_sp{
+    letter-spacing: 16px;
+}

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.dao.StudentDao" >
+
+    <!--分页查询-->
+    <select id="getStudentList" parameterType="Student" resultType="Student">
+        select *from d_student
+        <where>
+            <if test="s_name!=null and s_name!='' ">
+                and  s_name like  '%${s_name}%'
+            </if>
+            <if test="s_studentid!=null and s_studentid!=0">
+                and  s_studentid like  '%${s_studentid}%'
+            </if>
+            <if test="s_classid!=null and s_classid!=0">
+                and  s_classid like  '%${s_classid}%'
+            </if>
+            <if test="s_dormitoryid!=null and s_dormitoryid!=0">
+                and  s_dormitoryid like  '%${s_dormitoryid}%'
+            </if>
+        </where>
+        ORDER BY  s_id asc
+        limit #{currentPage},#{pageSize}
+    </select>
+    <!--查询数据总数-->
+    <select id="totalCount"  resultType="Integer">
+        select count(s_studentid) from d_student
+        <where>
+              <if test="s_name!=null and s_name!='' ">
+                 and  s_name like  '%${s_name}%'
+               </if>
+              <if test="s_studentid!=null and s_studentid!=0">
+                  and  s_studentid like  '%${s_studentid}%'
+               </if>
+              <if test="s_classid!=null and s_classid!=0">
+                  and  s_classid like  '%${s_classid}%'
+              </if>
+              <if test="s_dormitoryid!=null and s_dormitoryid!=0">
+                 and  s_dormitoryid like  '%${s_dormitoryid}%'
+              </if>
+          </where>
+    </select>
+    <!--通过id删除学生信息-->
+    <delete id="deleteStudent" parameterType="Integer" >
+        delete from d_student where s_id=#{s_id}
+    </delete>
+    <!--添加学生信息-->
+    <insert id="addStudent" parameterType="Student" keyProperty="s_id" useGeneratedKeys="true">
+        insert into d_student (s_studentid,s_name,s_sex,s_age,s_phone,s_classid,s_dormitoryid)
+        values(#{s_studentid},#{s_name},#{s_sex},#{s_age},#{s_phone},#{s_classid},#{s_dormitoryid})
+    </insert>
+
+
+    <select id="findStudentById"  parameterType="Integer" resultType="Student" >
+       select * from d_student where s_id=#{s_id}
+    </select>
+    <!--修改学生信息-->
+    <update id="updateStudent" parameterType="Student">
+        update d_student
+        <set>
+            <if test="s_studentid!=null and s_studentid!=0">
+                s_studentid=#{s_studentid},
+            </if>
+            <if test="s_name !=null and s_name !=''">
+                s_name=#{s_name},
+            </if>
+            <if test="s_sex !=null and s_sex !=''">
+                s_sex=#{s_sex},
+            </if>
+            <if test="s_age !=null and s_age !=0">
+                s_age=#{s_age},
+            </if>
+            <if test="s_phone !=null and s_phone !=0">
+                s_phone=#{s_phone},
+            </if>
+            <if test="s_classid!=null and s_classid!=0">
+                s_classid=#{s_classid},
+            </if>
+            <if test="s_dormitoryid!=null and s_dormitoryid!=0">
+                s_dormitoryid=#{s_dormitoryid},
+            </if>
+        </set>
+        where s_id = #{s_id}
+    </update>
+
+</mapper>

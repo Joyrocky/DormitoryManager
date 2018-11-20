@@ -1,0 +1,45 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/spring-core-4.3.6.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/mybatis-3.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/spring-expression-4.3.6.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/ant-1.9.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/log4j-api-2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/spring-aop-4.3.6.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/spring-jdbc-4.3.6.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/mysql-connector-java-5.1.40-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/taglibs-standard-spec-1.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/spring-aspects-4.3.6.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/jackson-annotations-2.8.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/commons-dbcp2-2.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/commons-lang3-3.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/commons-pool2-2.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/slf4j-log4j12-1.7.22.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/spring-web-4.3.6.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/ognl-3.1.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/aspectjweaver-1.8.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/spring-webmvc-4.3.6.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/commons-io-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/log4j-core-2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/asm-5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/log4j-1.2.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/jackson-core-2.8.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/spring-context-4.3.6.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/commons-fileupload-1.3.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/spring-beans-4.3.6.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/jackson-databind-2.8.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/ant-launcher-1.9.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/cglib-3.2.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/javassist-3.21.0-GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/slf4j-api-1.7.22.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/aopalliance-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/mybatis-spring-1.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/dormitorySystem_war_exploded/WEB-INF/lib/spring-tx-4.3.6.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

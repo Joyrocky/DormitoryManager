@@ -1,0 +1,104 @@
+package com.itheima.controller;
+
+
+import com.itheima.po.Admin;
+import com.itheima.po.PageInfo;
+import com.itheima.service.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+/**
+ * 用户控制器类
+ */
+@Controller
+public class AdminController {
+	// 依赖注入
+	@Autowired
+	private AdminService adminService;
+	/**
+	 * 用户登录
+	 */
+	@RequestMapping(value = "/login")
+	public String login(Admin admin, Model model, HttpSession session, HttpServletRequest request) {
+		// 通过账号和密码查询用户
+
+		Admin u = adminService.findAdmin(admin);
+		if(u!=null){
+			session.setAttribute("admin", admin);
+			return "homepage";
+		}
+		model.addAttribute("msg", "用户名或密码错误，请重新登录！");
+		return "login";
+	}
+
+	/**
+	 * 退出登录
+	 */
+	@RequestMapping(value = "/loginOut")
+	public String loginOut(Admin admin, Model model, HttpSession session) {
+		session.invalidate();
+		return "login";
+
+	}
+
+	/**
+	 * 分页查询
+	 */
+	@RequestMapping(value = "/findAdmin")
+	public String findAdmin(String a_username, String a_describe,Integer pageIndex,Integer a_id ,Integer pageSize, Model model) {
+
+		PageInfo<Admin> ai = adminService.findPageInfo(a_username,a_describe,a_id,pageIndex,pageSize);
+		model.addAttribute("ai",ai);
+		return "admin_list";
+	}
+
+	/**
+	 * 添加管理员信息
+	 */
+	@RequestMapping(value = "/addAdmin" ,method = RequestMethod.POST)
+	@ResponseBody
+	public String addAdmin( @RequestBody Admin admin) {
+		int a = adminService.addAdmin(admin);
+		return "admin_list";
+	}
+
+	/**
+	 * 删除管理员信息
+	 */
+	@RequestMapping( "/deleteAdmin")
+	@ResponseBody
+	public String deleteAdmin(Integer a_id) {
+		int a = adminService.deleteAdmin(a_id);
+		return "admin_list";
+	}
+
+	/**
+	 * 修改学生信息
+	 */
+	@RequestMapping( "/updateAdmin")
+	public String updateAdmin( Admin admin) {
+		int a = adminService.updateAdmin(admin);
+		return "redirect:/findAdmin";
+	}
+
+	@RequestMapping( "/findAdminById")
+	public String findAdminById( Integer a_id,HttpSession session) {
+		Admin a= adminService.findAdminById(a_id);
+		session.setAttribute("a",a);
+		return "admin_edit";
+	}
+
+	@RequestMapping( "/onehome")
+	public String onehome( ) {
+		return "onehome";
+	}
+
+}

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.dao.AdminDao" >
+
+    <!--登陆查询-->
+    <select id="findAdmin" parameterType="Admin" resultType="Admin">
+        select *from d_admin where a_username = '${a_username}' and a_password = '${a_password}' and a_power='1,2'
+    </select>
+
+    <!--分页查询-->
+    <select id="getAdminList" parameterType="Admin" resultType="Admin">
+        select *from d_admin
+        <where>
+            <if test="a_username!=null and a_username!='' ">
+                and  a_username like  '%${a_username}%'
+            </if>
+            <if test="a_describe!=null and a_describe!=''">
+                and  a_describe like  '%${a_describe}%'
+            </if>
+            <if test="a_id!=null and a_id!=0">
+                and  a_id like  '%${a_id}%'
+            </if>
+        </where>
+        ORDER BY  a_id asc
+        limit #{currentPage},#{pageSize}
+    </select>
+    <!--查询数据总数-->
+    <select id="totalCount"  resultType="Integer">
+        select count(a_id) from d_admin
+        <where>
+            <if test="a_username!=null and a_username!='' ">
+                and  a_username like  '%${a_username}%'
+            </if>
+            <if test="a_describe!=null and a_describe!=''">
+                and  a_describe like  '%${a_describe}%'
+            </if>
+            <if test="a_id!=null and a_id!=0">
+                and  a_id like  '%${a_id}%'
+            </if>
+        </where>
+    </select>
+
+    <!--添加管理员信息-->
+    <insert id="addAdmin" parameterType="Admin" keyProperty="a_id" useGeneratedKeys="true">
+        insert into d_admin (a_username,a_password,a_name,a_phone,a_power,a_describe)
+        values(#{a_username},#{a_password},#{a_name},#{a_phone},#{a_power},#{a_describe})
+    </insert>
+
+    <!--通过id删除管理员信息-->
+    <delete id="deleteAdmin" parameterType="Integer" >
+        delete from d_admin where a_id=#{a_id}
+    </delete>
+
+    <select id="findAdminById"  parameterType="Integer" resultType="Admin" >
+        select * from d_admin where a_id=#{a_id}
+    </select>
+    <!--修改管理员信息-->
+    <update id="updateAdmin" parameterType="Admin">
+        update d_admin
+        <set>
+            <if test="a_username!=null and a_username !=''">
+                a_username=#{a_username},
+            </if>
+            <if test="a_password !=null and a_password !=''">
+                a_password=#{a_password},
+            </if>
+            <if test="a_name !=null and a_name !=''">
+                a_name=#{a_name},
+            </if>
+            <if test="a_phone !=null and a_phone !=0">
+                a_phone=#{a_phone},
+            </if>
+            <if test="a_power !=null and a_power !=''">
+                a_power=#{a_power},
+            </if>
+            <if test="a_describe!=null and a_describe!=''">
+                a_describe=#{a_describe},
+            </if>
+        </set>
+        where a_id = #{a_id}
+    </update>
+</mapper>

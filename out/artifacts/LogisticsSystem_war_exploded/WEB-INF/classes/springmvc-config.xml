@@ -1,0 +1,44 @@
+<!--suppress ALL -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd 
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd 
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd 
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+    <!-- 加载属性文件 -->
+    <context:property-placeholder 
+               location="classpath:resource.properties" />
+    <!-- 配置扫描器 -->
+    <context:component-scan base-package="com.itheima.controller" />
+    <!-- 注解驱动：配置处理器映射器和适配器 -->
+    <mvc:annotation-driven />
+    <!--配置静态资源的访问映射，此配置中的文件，将不被前端控制器拦截 -->
+    <mvc:resources location="/js/" mapping="/js/**" />
+    <mvc:resources location="/css/" mapping="/css/**" />
+    <mvc:resources location="/fonts/" mapping="/fonts/**" />
+    <mvc:resources location="/images/" mapping="/images/**" />
+    <mvc:resources location="/assets/" mapping="/assets/**" />
+    <mvc:resources location="/lib/" mapping="/lib/**" />
+    <!-- 配置视图解释器ViewResolver
+    <bean id="jspViewResolver" class=
+    "org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+    </bean>	-->
+   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+       <property name="defaultEncoding" value="UTF-8"/>
+   </bean>
+
+    <!-- 配置拦截器-->
+
+</beans>
