@@ -10,18 +10,19 @@
 
 <html>
 <head>
-    <title>后台登录-X-admin2.0</title>
+    <title>后台登录</title>
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <%--<meta http-equiv="Cache-Control" content="no-siteapp" />--%>
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/images/favicon.ico" sizes="32x32" />
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/xadmin.css">
     <script type="text/javascript" src="./js/jquery-1.3.2.min.js"></script>
     <script src="lib/layui/layui.js"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
+    <script src="/layui_exts/excel.js"></script>
 
     <style type="text/css">
         .layui-table{
@@ -39,25 +40,25 @@
         <a href="">首页</a>
         <a href="/findStudent">学生信息</a>
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="/findStudent" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="/findStudent" >
-            <input class="layui-input" placeholder="请输入姓名" name="s_name" id="s_name" value="${s_name}">
+            <input class="layui-input" placeholder="请输入姓名" name="s_name" id="s_name">
             <input class="layui-input" placeholder="请输入学号" name="s_studentid" id="s_studentid">
             <input class="layui-input" placeholder="请输入班级编号" name="s_classid" id="s_classid">
-            <input class="layui-input" placeholder="请输入寝室编号" name="s_dormitoryid" id="s_dormitoryid">
+            <input class="layui-input" placeholder="请输入班级名" name="s_classname" id="s_classname">
 
             <input class="layui-input" type="hidden" name="pageIndex" value="1">
             <input class="layui-input" type="hidden" name="pageSize" value="3">
-            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+            <button class="layui-btn"  lay-submit="" lay-filter="search"><i class="layui-icon">&#xe615;</i></button>
         </form>
     </div>
     <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button id="addStudnetBtn" class="layui-btn layui-btn-normal"> <i class="layui-icon">&#xe654;</i>添加 </button>
+        <button class="layui-btn layui-btn-warm" lay-filter="toolbarDemo" lay-submit=""><i class="layui-icon">&#xe67c;</i>导出</button>
         <span class="x-right" style="line-height:40px">共有数据：${pi.totalCount} 条</span>
     </xblock>
 
@@ -106,6 +107,13 @@
                     <label class="layui-form-label">班级编号：</label>
                     <div class="layui-input-block">
                         <input type="text" name="s_classid" class="layui-input" placeholder="请输入班级编号">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">班级名：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="s_classname" class="layui-input" placeholder="请输入班级名">
                     </div>
                 </div>
 
@@ -179,6 +187,13 @@
                 </div>
 
                 <div class="layui-form-item">
+                    <label class="layui-form-label">班级名：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="s_classname" id="edit_classname" value="" class="layui-input" placeholder="请输入班级名">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
                     <label class="layui-form-label">宿舍编号：</label>
                     <div class="layui-input-block">
                         <input type="text" name="s_dormitoryid"  id="edit_dormitoryids" value="" class="layui-input" placeholder="请输入宿舍编号">
@@ -200,9 +215,9 @@
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
+            <%--<th>--%>
+                <%--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--%>
+            <%--</th>--%>
             <th>ID</th>
             <th>学号</th>
             <th>姓名</th>
@@ -210,15 +225,16 @@
             <th>年龄</th>
             <th>电话</th>
             <th>班级编号</th>
+            <th>班级名</th>
             <th>寝室编号</th>
             <th>操作</th>
         </thead>
         <tbody>
 <c:forEach items="${pi.list}" var="student">
         <tr>
-            <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
+            <%--<td>--%>
+                <%--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>--%>
+            <%--</td>--%>
             <td>${student.s_id}</td>
             <td>${student.s_studentid}</td>
             <td>${student.s_name}</td>
@@ -226,6 +242,7 @@
             <td>${student.s_age}</td>
             <td>${student.s_phone}</td>
             <td>${student.s_classid}</td>
+            <td>${student.s_classname}</td>
             <td>${student.s_dormitoryid}</td>
             <td>
                 <a title="编辑"    id= "updateEdit"    href="/findStudentById?s_id=${student.s_id}">
@@ -248,17 +265,82 @@
         <c:param name="totalPageCount" value="${pi.pageTotalCount}"/>
     </c:import>
 </div>
+</div>
 <script>
 
+    layui.config({
+        base: 'layui_exts/',
+    }).extend({
+        excel: 'excel',
+    });
 
-    layui.use(['form','layer','laydate'], function(){
+    layui.use(['jquery', 'excel','form','layer','laydate'], function(){
         var form = layui.form,
             $ = layui.jquery,
             laydate = layui.laydate;
+        var excel = parent.layui.excel;
+
         //执行一个laydate实例
         laydate.render({
             elem: '#start' //指定元素
         });
+
+        form.on('submit(toolbarDemo)', function(){
+
+            $.ajax({
+                url: '/exportstudentlist',
+                type: 'post',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    console.log(data);
+
+                    // 1. 如果需要调整顺序，请执行梳理函数
+                    var dt = excel.filterExportData(data, [
+                        's_id'
+                        ,'s_studentid'
+                        ,'s_name'
+                        ,'s_sex'
+                        ,'s_age'
+                        ,'s_phone'
+                        ,'s_classid'
+                        ,'s_classname'
+                        ,'s_dormitoryid'
+                    ]);
+
+                    // 2. 数组头部新增表头
+                    dt.unshift({s_id: 'ID', s_studentid: '学号', s_name: '姓名', s_sex: '性别', s_age: '年龄', s_phone: '电话', s_classid: '班级编号', s_classname: '班级名', s_dormitoryid: '寝室编号'});
+
+                    // 意思是：A列40px，B列60px(默认)，C列120px，D、E、F等均未定义
+                    var colConf = excel.makeColConfig({
+                        'B': 90,
+                        'C': 80,
+                        'F': 90
+                    }, 60);
+
+                    var timestart = Date.now();
+                    // 3. 执行导出函数，系统会弹出弹框
+                    excel.exportExcel({
+                        sheet1: dt
+                    }, '学生数据.xlsx', 'xlsx', {
+                        extend: {
+                            '!cols': colConf
+                        }
+                    });
+                    var timeend = Date.now();
+
+                    var spent = (timeend - timestart) / 1000;
+                    layer.alert('导出耗时 '+spent+' s');
+                    //setTimeout(function () {window.location.href='/findAdmin';},2000);
+                },
+
+                error: function () {
+                    //console.log(data);
+                    setTimeout(function () {window.location.href='/findStudent';},2000);
+                }
+            });
+        });
+
         /*添加弹出框*/
         $("#addStudnetBtn").click(function () {
             layer.open({
@@ -298,41 +380,6 @@
 
 
 
-
-// function editStudent(obj,s_id) {
-//     $.ajax({
-//             async: false,
-//             url:"/findStudentById",
-//             type:"get",
-//             data:{"s_id":s_id},
-//             dataType:'json',
-//             contentType: "application/json; charset=utf-8",
-//             success:function (data ) {
-//                 $("#edit_studentid").val(JSON.stringify(data.s_studentid));
-//                 $("#edit_names").val(JSON.stringify(data.s_name));
-//                 $("#edit_sex").val(JSON.stringify(data.s_sex));
-//                 $("#edit_age").val(JSON.stringify(data.s_age));
-//                 $("#edit_phone").val(JSON.stringify(data.s_phone));
-//                 $("#edit_classids").val(JSON.stringify(data.s_classid));
-//                 $("#edit_dormitoryids").val(JSON.stringify(data.s_dormitoryid));
-//                 console.log($("#edit_studentid").val(JSON.stringify(data.s_studentid)));
-//                 console.log( $("#edit_studentid").val());
-//                 console.log(JSON.stringify(data.s_studentid));
-//                 layer.open({
-//                     type:1,
-//                     title:"编辑学生",
-//                     skin:"updateCss",
-//                     area:["50%"],
-//                     anim:2,
-//                     content:$("#updteDiv").html(),
-//                 });
-//             }
-//       });
-//
-// }
-
-
-
     /*删除*/
     function member_del(obj,s_id){
         layer.confirm('确认要删除吗？',function(index){
@@ -350,17 +397,6 @@
         });
     }
 
-
-    /*批量删除*/
-    function delAll (obj,s_id) {
-
-        var data = tableCheck.getData();
-        layer.confirm('确认要删除吗？'+data,function(s_id){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-    }
 </script>
 
 

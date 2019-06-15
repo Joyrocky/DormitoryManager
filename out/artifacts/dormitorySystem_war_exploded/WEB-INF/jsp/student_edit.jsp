@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>修改信息</title>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/images/favicon.ico" sizes="32x32" />
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
     <link rel="stylesheet" href="/css/pg_btn.css">
@@ -22,7 +22,7 @@
 <body>
 
 <div class="x-body">
-    <form class="layui-form" action="/updateStudent" method="post"  id="f_auto" >
+    <form class="layui-form" action="/updateStudent" method="post"  id="f_auto" accept-charset="UTF-8">
         <input type="hidden" value="${sessionScope.s.s_id}" name="s_id" id="s_id"/>
         <div class="layui-form-item">
             <label for="s_studentid" class="layui-form-label">
@@ -48,9 +48,9 @@
             <label for="s_sex" class="layui-form-label">
                 <span class="f_sp">性别</span>
             </label>
-            <div class="layui-input-inline">
-                <input type="radio" name="s_sex" id="s_sex" value="男" title="男" checked="">
-                <input type="radio" name="s_sex" id="s_sex" value="女" title="女">
+            <div class="layui-input-inline" id="s_sex">
+                <input type="radio" name="s_sex" id="s_male" value="男" title="男" checked="">
+                <input type="radio" name="s_sex" id="s_female" value="女" title="女">
             </div>
         </div>
 
@@ -81,6 +81,16 @@
             <div class="layui-input-inline">
                 <input type="text" id="s_classid" name="s_classid"
                        autocomplete="off" value="${sessionScope.s.s_classid}" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="s_classid" class="layui-form-label">
+                <span class="">*</span>班级名
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="s_classname" name="s_classname"
+                       autocomplete="off" value="${sessionScope.s.s_classname}" class="layui-input">
             </div>
         </div>
 

@@ -7,14 +7,14 @@
     <select id="getDormitoryList" parameterType="Dormitory" resultType="Dormitory">
         select *from d_dormitoryinfo
         <where>
-            <if test="d_name!=null and d_name!='' ">
-                and  d_name like  '%${d_name}%'
-            </if>
             <if test="a_name!=null and a_name!=''">
                 and  a_name like  '%${a_name}%'
             </if>
             <if test="s_dormitoryid!=null and s_dormitoryid!=0">
                 and  s_dormitoryid like  '%${s_dormitoryid}%'
+            </if>
+            <if test="d_dormbuilding !=null and d_dormbuilding !=''">
+                and  d_dormbuilding like  '%${d_dormbuilding}%'
             </if>
         </where>
         ORDER BY  d_id asc
@@ -24,22 +24,22 @@
     <select id="totalCount"  resultType="Integer">
         select count(s_dormitoryid) from d_dormitoryinfo
         <where>
-            <if test="d_name!=null and d_name!='' ">
-                and  d_name like  '%${d_name}%'
-            </if>
             <if test="a_name!=null and a_name!=''">
                 and  a_name like  '%${a_name}%'
             </if>
             <if test="s_dormitoryid!=null and s_dormitoryid!=0">
                 and  s_dormitoryid like  '%${s_dormitoryid}%'
             </if>
+            <if test="d_dormbuilding !=null and d_dormbuilding !=''">
+                and  d_dormbuilding like  '%${d_dormbuilding}%'
+            </if>
           </where>
     </select>
 
     <!--添加宿舍信息-->
     <insert id="addDormitory" parameterType="Dormitory" keyProperty="d_id" useGeneratedKeys="true">
-        insert into d_dormitoryinfo (s_dormitoryid,d_name,d_bedtotal,d_bed,a_name)
-        values(#{s_dormitoryid},#{d_name},#{d_bedtotal},#{d_bed},#{a_name})
+        insert into d_dormitoryinfo (s_dormitoryid,d_dormbuilding,d_bedtotal,d_bed,a_name)
+        values(#{s_dormitoryid},#{d_dormbuilding},#{d_bedtotal},#{d_bed},#{a_name})
     </insert>
 
     <!--通过id删除宿舍信息-->
@@ -50,6 +50,7 @@
     <select id="findDormitoryById"  parameterType="Integer" resultType="Dormitory" >
         select * from d_dormitoryinfo where d_id=#{d_id}
     </select>
+
     <!--修改宿舍信息-->
     <update id="updateDormitory" parameterType="Dormitory">
         update d_dormitoryinfo
@@ -57,8 +58,8 @@
             <if test="s_dormitoryid!=null and s_dormitoryid!=0">
                 s_dormitoryid=#{s_dormitoryid},
             </if>
-            <if test="d_name !=null and d_name !=''">
-                d_name=#{d_name},
+            <if test="d_dormbuilding !=null and d_dormbuilding !=''">
+                d_dormbuilding=#{d_dormbuilding},
             </if>
             <if test="d_bedtotal !=null and d_bedtotal !=''">
                 d_bedtotal=#{d_bedtotal},
@@ -75,37 +76,34 @@
 
     <!--宿舍人员信息查询信息-->
     <resultMap type="com.itheima.po.Dormitory" id="cardAndInfo2">
-        <id property="s_dormitoryid" column="s_dormitoryid"/>
-        <result property="d_name" column="d_name"/>
+        <id property="d_id" column="d_id"/>
+        <result property="s_dormitoryid" column="s_dormitoryid" />
+        <result property="d_dormbuilding" column="d_dormbuilding" />
         <result property="d_bedtotal" column="d_bedtotal"/>
         <result property="d_bed" column="d_bed"/>
         <result property="a_name" column="a_name"/>
-        <association property="students" javaType="Student" >
-            <id property="s_studentid" column="s_studentid"/>
+        <collection property="students" ofType="com.itheima.po.Student" javaType="ArrayList">
+            <id property="s_id" column="s_id"/>
+            <result property="s_studentid" column="s_studentid"/>
             <result property="s_name" column="s_name"/>
             <result property="s_sex" column="s_sex"/>
             <result property="s_age" column="s_age"/>
             <result property="s_phone" column="s_phone"/>
             <result property="s_classid" column="s_classid"/>
+            <result property="s_classname" column="s_classname"/>
             <result property="s_dormitoryid" column="s_dormitoryid"/>
-        </association>
+        </collection>
     </resultMap>
 
     <select id="findDormitoryStudent" parameterType="Dormitory" resultMap="cardAndInfo2">
         SELECT dormitoryinfos.*,students.*
-        FROM d_dormitoryinfo dormitoryinfos,d_student students
---         WHERE dormitoryinfos.s_dormitoryid = students.s_dormitoryid
---         and dormitoryinfos.s_dormitoryid like '${s_dormitoryid}'
-
-        <where>
-            <if test="dormitoryinfos.s_dormitoryid!=null and dormitoryinfos.s_dormitoryid = students.s_dormitoryid ">
-                and  dormitoryinfos.s_dormitoryid  like  '${s_dormitoryid}'
-            </if>
-        </where>
+        FROM d_dormitoryinfo dormitoryinfos join d_student students
+        on dormitoryinfos.s_dormitoryid = students.s_dormitoryid
+        where dormitoryinfos.s_dormitoryid = #{s_dormitoryid}
     </select>
 
-
-
-
+    <select id="getAll" resultType="Dormitory">
+        select * from d_dormitoryinfo;
+    </select>
 
 </mapper>

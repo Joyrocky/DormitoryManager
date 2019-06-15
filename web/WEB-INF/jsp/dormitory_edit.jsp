@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>修改信息</title>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/images/favicon.ico" sizes="32x32" />
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
     <link rel="stylesheet" href="/css/pg_btn.css">
@@ -35,12 +35,12 @@
         </div>
 
         <div class="layui-form-item">
-            <label for="d_name" class="layui-form-label">
-                <span class="">宿舍名</span>
+            <label for="d_dormbuilding" class="layui-form-label">
+                <span class="">宿舍楼</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="d_name" name="d_name"
-                       autocomplete="off" value="${sessionScope.d.d_name}" class="layui-input">
+                <input type="text" id="d_dormbuilding" name="d_dormbuilding"
+                       autocomplete="off" value="${sessionScope.d.d_dormbuilding}" class="layui-input">
             </div>
         </div>
 
@@ -84,50 +84,7 @@
 </div>
 
 <script>
-    // layui.use(['form','layer','laydate'], function(){
-    //     var form = layui.form,
-    //         $ = layui.jquery,
-    //         laydate = layui.laydate;
-    //     form.on('submit(updateClass)', function(obj,c_id) {
-    //
-    //         $.ajax({
-    //             url: '/updateClass',
-    //             type: "post",
-    //             data:{"c_id":c_id},
-    //             success:function(data){
-    //                 layer.msg('修改成功', {icon: 1, time: 3000});
-    //                 setTimeout(function () {window.location.href='/findClass';},2000);
-    //
-    //             },
-    //             error:function(){
-    //                 console.log($("#c_id").val());
-    //                 layer.msg('修改失败',{icon:0,time:3000});
-    //                 setTimeout(function () {window.location.href='/findClass';},2000);
-    //             }
-    //         });
-    //     })
-    //
-    // });
 
-    // function editClass(){
-    //            $.ajax({
-    //                     url: '/updateClass',
-    //                     type: "post",
-    //                      dateType:'json',
-    //                     data:{"c_id":c_id,"s_classid":s_classid,"c_classname":c_classname,"c_counsellor":c_counsellor},
-    //                     success:function(data){
-    //                         console.log(data);
-    //                         layer.msg('修改成功', {icon: 1, time: 3000});
-    //                         setTimeout(function () {window.location.href='/findClass';},2000);
-    //
-    //                     },
-    //                     error:function(){
-    //                         console.log($("#c_id").val());
-    //                         layer.msg('修改失败',{icon:0,time:3000});
-    //                         setTimeout(function () {window.location.href='/findClass';},2000);
-    //                     }
-    //                 });
-    //         }
 </script>
 </body>
 </html>

@@ -27,4 +27,5 @@ public interface AdminDao {
 	public int deleteAdmin(Integer a_id);   //删除管理员信息
 	public int updateAdmin(Admin admin); //修改管理员信息
 	public Admin findAdminById(Integer a_id);
+	public List<Admin> getAll();
 }

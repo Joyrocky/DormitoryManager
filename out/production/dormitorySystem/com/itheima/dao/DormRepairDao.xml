@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.dao.DormRepairDao" >
+
+    <!--分页查询-->
+    <select id="getDormRepairList" parameterType="DormRepair" resultType="DormRepair">
+        select *from d_dormrepair
+        <where>
+            <if test="d_id!=null and d_id!=0">
+                and  d_id like  '%${d_id}%'
+            </if>
+            <if test="d_dormbuilding !=null and d_dormbuilding !=''">
+                and  d_dormbuilding like  '%${d_dormbuilding}%'
+            </if>
+        </where>
+        ORDER BY  r_id asc
+        limit #{currentPage},#{pageSize}
+    </select>
+    <!--查询数据总数-->
+    <select id="totalCount"  resultType="Integer">
+        select count(r_id) from d_dormrepair
+        <where>
+            <if test="d_id!=null and d_id!=0">
+                and  d_id like  '%${d_id}%'
+            </if>
+            <if test="d_dormbuilding !=null and d_dormbuilding !=''">
+                and  d_dormbuilding like  '%${d_dormbuilding}%'
+            </if>
+        </where>
+    </select>
+
+    <!--添加宿舍信息-->
+    <insert id="addDormRepair" parameterType="DormRepair" keyProperty="r_id" useGeneratedKeys="true">
+        insert into d_dormrepair (d_id,d_dormbuilding,r_name,reason,create_time,update_time)
+        values(#{d_id},#{d_dormbuilding},#{r_name},#{reason},now(),now())
+    </insert>
+
+    <!--通过id删除宿舍信息-->
+    <delete id="deleteDormRepair" parameterType="Integer" >
+        delete from d_dormrepair where r_id=#{r_id}
+    </delete>
+
+    <select id="findDormRepairById"  parameterType="Integer" resultType="DormRepair" >
+        select * from d_dormrepair where r_id=#{r_id}
+    </select>
+
+    <select id="getAll" resultType="DormRepair">
+        select * from d_dormrepair;
+    </select>
+
+    <!--修改宿舍信息-->
+    <update id="updateDormRepair" parameterType="DormRepair">
+        update d_dormrepair
+        <set>
+            <if test="d_id!=null and d_id!=0">
+                d_id=#{d_id},
+            </if>
+            <if test="d_dormbuilding !=null and d_dormbuilding !=''">
+                d_dormbuilding=#{d_dormbuilding},
+            </if>
+            <if test="r_name !=null and r_name !=''">
+                r_name=#{r_name},
+            </if>
+            <if test="reason !=null and reason !=''">
+                reason=#{reason},
+            </if>
+            <if test="update_time !=null ">
+                update_time=now(),
+            </if>
+        </set>
+        where r_id = #{r_id}
+    </update>
+
+    <!--宿舍人员信息查询信息-->
+    <resultMap type="com.itheima.po.DormRepair" id="cardAndInfo2">
+        <id property="r_id" column="r_id"/>
+        <result property="d_id" column="d_id" />
+        <result property="d_dormbuilding" column="d_dormbuilding" />
+        <result property="r_name" column="r_name"/>
+        <result property="reason" column="reason"/>
+        <result property="create_time" column="create_time"/>
+        <result property="update_time" column="update_time"/>
+    </resultMap>
+
+
+</mapper>

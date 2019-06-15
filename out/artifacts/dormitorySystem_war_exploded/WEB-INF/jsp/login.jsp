@@ -9,10 +9,11 @@
 <html>
 <head>
     <link rel="stylesheet" href="/css/usersLogin.css">
+    <link rel="icon" href="/images/favicon.ico" sizes="32x32" />
     <script src="/js/jquery-1.3.2.min.js"></script>
     <script src="js/login.js"></script>
 
-    <title>Login</title>
+    <title>前台首页</title>
 </head>
 <body>
 
@@ -37,17 +38,11 @@
                 <input type="submit" value="登陆"/>
             </form>
         </div>
-
-        <div class="tail">
-            <a href="">忘记用户名</a>
-            <a href="">忘记密码？</a>
-        </div>
     </div>
 </div>
 
 <div class="footer">
-    <span>@Copyright © 2018-2020 版权所有 </span>
+    <span>@Copyright © 2019-2020 版权所有 </span>
 </div>
-
 </body>
 </html>

@@ -20,6 +20,7 @@
 	<mvc:resources location="/fonts/" mapping="/fonts/**"/>
 	<mvc:resources location="/images/" mapping="/images/**"/>
 	<mvc:resources location="/lib/" mapping="/lib/**"/>
+	<mvc:resources location="/layui_exts/" mapping="/layui_exts/**"/>
 
 	<!-- 配置视图解析器 -->
 	<bean class=

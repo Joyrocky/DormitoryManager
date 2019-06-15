@@ -1,11 +1,14 @@
 package com.itheima.po;
 
+import java.util.List;
+
 public class Class {
     private  Integer c_id;
-    private  Integer s_classid;
+    private  Integer c_classid;
     private  String  c_classname;
     private  String  c_counsellor;
-    private  Student  students;
+    //班级与学生为一对多关系，使用链表
+    private List<Student>  students;
 
     public Integer getC_id() {
         return c_id;
@@ -15,12 +18,12 @@ public class Class {
         this.c_id = c_id;
     }
 
-    public Integer getS_classid() {
-        return s_classid;
+    public Integer getC_classid() {
+        return c_classid;
     }
 
-    public void setS_classid(Integer s_classid) {
-        this.s_classid = s_classid;
+    public void setC_classid(Integer c_classid) {
+        this.c_classid = c_classid;
     }
 
     public String getC_classname() {
@@ -39,11 +42,11 @@ public class Class {
         this.c_counsellor = c_counsellor;
     }
 
-    public Student getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Student students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 }

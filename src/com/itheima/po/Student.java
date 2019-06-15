@@ -9,6 +9,7 @@ public class Student {
     private  Integer  s_age;
     private  Integer  s_phone;
     private  Integer  s_classid;
+    private  String s_classname;
     private  Integer  s_dormitoryid;
 
     public static long getSerialVersionUID() {
@@ -69,6 +70,14 @@ public class Student {
 
     public void setS_classid(Integer s_classid) {
         this.s_classid = s_classid;
+    }
+
+    public String getS_classname() {
+        return s_classname;
+    }
+
+    public void setS_classname(String s_classname) {
+        this.s_classname = s_classname;
     }
 
     public Integer getS_dormitoryid() {

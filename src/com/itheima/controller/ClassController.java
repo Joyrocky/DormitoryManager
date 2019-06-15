@@ -30,12 +30,24 @@ public class ClassController {
 	 * pageSize  显示条数
 	 */
 	@RequestMapping(value = "/findClass")
-	public String findClass(String c_classname, String c_counsellor,Integer s_classid, Integer pageIndex, Integer pageSize, Model model) {
+	public String findClass(Integer c_classid, String c_classname, String c_counsellor,
+							Integer pageIndex, Integer pageSize, Model model) {
 
-	  PageInfo<Class> ci = classService.findPageInfo(c_classname,c_counsellor,s_classid,pageIndex,pageSize);
+	  PageInfo<Class> ci = classService.findPageInfo(c_classname,c_counsellor,
+			  c_classid,pageIndex,pageSize);
 	  model.addAttribute("ci",ci);
-	  model.addAttribute("c_classname",c_classname);
+	  model.addAttribute("c_classid",c_classid);
 		return "class_list";
+	}
+
+	/**
+	 * 导出Excel
+	 */
+	@RequestMapping(value = "/exportclasslist", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Class> exportClass(){
+		List<Class> classList = classService.getAll();
+		return classList;
 	}
 
 	/**
@@ -68,7 +80,7 @@ public class ClassController {
 	/**
 	 * 修改班级信息
 	 */
-	@RequestMapping( "/updateClass")
+	@RequestMapping(value = "/updateClass" ,method = RequestMethod.POST)
 
 	public String updateClass( Class uclass) {
 		int c = classService.updateClass(uclass);
@@ -84,4 +96,12 @@ public class ClassController {
 		model.addAttribute("cs",c);
 		return "class_Studentlist";
 	}
+
+	//采用Ajax来提交表单，并返回JSON数据
+//	@RequestMapping(value = "/findClassStudentlist",method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<Class> findClassStudentlist(@RequestBody Class uclass){
+//		List<Class> c = classService.findClassStudent(uclass);
+//		return c;
+//	}
 }

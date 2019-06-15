@@ -16,8 +16,8 @@
             <if test="s_classid!=null and s_classid!=0">
                 and  s_classid like  '%${s_classid}%'
             </if>
-            <if test="s_dormitoryid!=null and s_dormitoryid!=0">
-                and  s_dormitoryid like  '%${s_dormitoryid}%'
+            <if test="s_classname!=null and s_classname!='' ">
+                and  s_classname like  '%${s_classname}%'
             </if>
         </where>
         ORDER BY  s_id asc
@@ -36,8 +36,8 @@
               <if test="s_classid!=null and s_classid!=0">
                   and  s_classid like  '%${s_classid}%'
               </if>
-              <if test="s_dormitoryid!=null and s_dormitoryid!=0">
-                 and  s_dormitoryid like  '%${s_dormitoryid}%'
+              <if test="s_classname!=null and s_classname!='' ">
+                and  s_classname like  '%${s_classname}%'
               </if>
           </where>
     </select>
@@ -47,8 +47,8 @@
     </delete>
     <!--添加学生信息-->
     <insert id="addStudent" parameterType="Student" keyProperty="s_id" useGeneratedKeys="true">
-        insert into d_student (s_studentid,s_name,s_sex,s_age,s_phone,s_classid,s_dormitoryid)
-        values(#{s_studentid},#{s_name},#{s_sex},#{s_age},#{s_phone},#{s_classid},#{s_dormitoryid})
+        insert into d_student (s_studentid,s_name,s_sex,s_age,s_phone,s_classid,s_classname,s_dormitoryid)
+        values(#{s_studentid},#{s_name},#{s_sex},#{s_age},#{s_phone},#{s_classid},#{s_classname},#{s_dormitoryid})
     </insert>
 
 
@@ -77,11 +77,18 @@
             <if test="s_classid!=null and s_classid!=0">
                 s_classid=#{s_classid},
             </if>
+            <if test="s_classname !=null and s_classname !=''">
+                s_classname=#{s_classname},
+            </if>
             <if test="s_dormitoryid!=null and s_dormitoryid!=0">
                 s_dormitoryid=#{s_dormitoryid},
             </if>
         </set>
         where s_id = #{s_id}
     </update>
+
+    <select id="getAll" resultType="Student">
+        select * from d_student;
+    </select>
 
 </mapper>

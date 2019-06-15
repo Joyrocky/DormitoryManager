@@ -4,6 +4,7 @@ import com.itheima.dao.AdminDao;
 import com.itheima.po.Admin;
 import com.itheima.po.PageInfo;
 import com.itheima.service.AdminService;
+import com.itheima.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +24,16 @@ public class AdminServiceImpl implements AdminService {
 	//管理登陆查询
 	@Override
 	public Admin findAdmin(Admin admin) {
-		Admin a = this.adminDao.findAdmin(admin);
+		Admin a = adminDao.findAdmin(admin);
 		return a;
 	}
+
+	@Override
+	public List<Admin> getAll(){
+
+		List<Admin> adminList = adminDao.getAll();
+		return adminList;
+    }
 
 	@Override
 	public PageInfo<Admin> findPageInfo(String a_username, String a_describe,Integer a_id,Integer pageIndex, Integer pageSize) {

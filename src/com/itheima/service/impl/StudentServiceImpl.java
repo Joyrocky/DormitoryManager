@@ -25,21 +25,27 @@ public class StudentServiceImpl implements StudentService {
 	//分页查询
 	@Override
 	public PageInfo<Student> findPageInfo(String s_name, Integer s_studentid,Integer s_classid,
-										  Integer s_dormitoryid, Integer pageIndex, Integer pageSize) {
+										  String s_classname, Integer pageIndex, Integer pageSize) {
 		PageInfo<Student> pi = new PageInfo<Student>();
 		pi.setPageIndex(pageIndex);
 		pi.setPageSize(pageSize);
 		//获取总条数
-		Integer totalCount = studentDao.totalCount(s_name,s_studentid,s_classid,s_dormitoryid);
+		Integer totalCount = studentDao.totalCount(s_name,s_studentid,s_classid,s_classname);
 		if (totalCount>0){
 			pi.setTotalCount(totalCount);
 			//每一页显示学生信息数
 			//currentPage = (pageIndex-1)*pageSize  当前页码数减1*最大条数=开始行数
-		List<Student> studentList =	studentDao.getStudentList(s_name,s_studentid,s_classid,s_dormitoryid,
+		List<Student> studentList =	studentDao.getStudentList(s_name,s_studentid,s_classid,s_classname,
 				     (pi.getPageIndex()-1)*pi.getPageSize(),pi.getPageSize());
 		  pi.setList(studentList);
 		}
 		return pi;
+	}
+
+	@Override
+	public List<Student> getAll(){
+		List<Student> studentList = studentDao.getAll();
+		return studentList;
 	}
 
 	//通过id删除学生信息

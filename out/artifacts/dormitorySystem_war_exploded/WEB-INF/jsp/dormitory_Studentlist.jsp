@@ -10,13 +10,13 @@
 
 <html>
 <head>
-    <title>后台登录-X-admin2.0</title>
+    <title>后台登录</title>
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <%--<meta http-equiv="Cache-Control" content="no-siteapp" />--%>
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/images/favicon.ico" sizes="32x32" />
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/xadmin.css">
     <script type="text/javascript" src="./js/jquery-1.3.2.min.js"></script>
@@ -40,7 +40,7 @@
         <a href="/findDormitoryStudent">人员信息</a>
 
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="/findDormitoryStudent" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
@@ -50,7 +50,7 @@
 
             <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
-    </div>---------------------
+    </div>
 
 
     <%--添加模态框--%>
@@ -61,13 +61,6 @@
                     <label class="layui-form-label">宿舍编号：</label>
                     <div class="layui-input-block">
                         <input type="text" name="s_dormitoryid" class="layui-input" placeholder="请输入宿舍编号">
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">宿舍名：</label>
-                    <div class="layui-input-block">
-                        <input type="text" lay-verify="required" name="d_name"  class="layui-input" placeholder="请输入宿舍名">
                     </div>
                 </div>
 
@@ -102,41 +95,43 @@
         </div>
     </div>
 
-
-
-
     <%--表格数据--%>
     <table class="layui-table">
         <thead>
         <tr>
-            <th>
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
+            <%--<th>--%>
+                <%--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>--%>
+            <%--</th>--%>
             <th>宿舍编号</th>
-            <th>宿舍名</th>
+            <th>宿舍楼</th>
             <th>已用床位</th>
             <th>学生姓名</th>
             <th>电话</th>
             <th>班级编号</th>
+                <th>班级名</th>
 
         </thead>
         <tbody>
 <c:forEach items="${ds}" var="d">
+
+    <c:set value="${d.students}" var="dd" />
+
+    <c:forEach items="${dd}" var="sd">
         <tr>
-            <td>
-                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
             <td>${d.s_dormitoryid}</td>
-            <td>${d.d_name}</td>
+            <td>${d.d_dormbuilding}</td>
             <td>${d.d_bed}</td>
-            <td>${d.students.s_name}</td>
-            <td>${d.students.s_phone}</td>
-            <td>${d.students.s_classid}</td>
+            <td>${sd.s_name}</td>
+            <td>${sd.s_phone}</td>
+            <td>${sd.s_classid}</td>
+            <td>${sd.s_classname}</td>
         </tr>
+    </c:forEach>
+
 </c:forEach>
         </tbody>
     </table>
-
+</div>
 
 
 

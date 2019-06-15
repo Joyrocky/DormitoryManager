@@ -14,9 +14,9 @@ public interface DormitoryDao {
 	 */
 
 	 //获取总条数
-     public Integer totalCount(@Param("d_name") String d_name, @Param("a_name") String a_name, @Param("s_dormitoryid") Integer s_dormitoryid);
+     public Integer totalCount(@Param("a_name") String a_name, @Param("s_dormitoryid") Integer s_dormitoryid,@Param("d_dormbuilding") String d_dormbuilding);
 	 //获取用户列表
-     public List<Dormitory> getDormitoryList(@Param("d_name") String d_name, @Param("a_name") String a_name, @Param("s_dormitoryid") Integer s_dormitoryid, @Param("currentPage") Integer currentPage, @Param("pageSize") Integer pageSize);
+     public List<Dormitory> getDormitoryList(@Param("a_name") String a_name, @Param("s_dormitoryid") Integer s_dormitoryid, @Param("d_dormbuilding") String d_dormbuilding, @Param("currentPage") Integer currentPage, @Param("pageSize") Integer pageSize);
 
 	public int addDormitory(Dormitory dormitory);    //添加宿舍信息
 	public int deleteDormitory(Integer d_id);   //删除宿舍信息
@@ -24,6 +24,6 @@ public interface DormitoryDao {
 	public Dormitory findDormitoryById(Integer d_id);
 
 	public List<Dormitory> findDormitoryStudent(Dormitory dormitory);//查询宿舍人员信息
-
+	public List<Dormitory> getAll();
 
 }

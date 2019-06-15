@@ -5,12 +5,19 @@
 
     <!--登陆查询-->
     <select id="findAdmin" parameterType="Admin" resultType="Admin">
-        select *from d_admin where a_username = '${a_username}' and a_password = '${a_password}' and a_power='1,2'
+        select * from d_admin
+        where
+        <if test="a_username!=null and a_username!='' ">
+        a_username = #{a_username}
+        </if>
+        <if test="a_password!=null and a_password!='' ">
+        and a_password = #{a_password}
+        </if>
     </select>
 
     <!--分页查询-->
     <select id="getAdminList" parameterType="Admin" resultType="Admin">
-        select *from d_admin
+        select * from d_admin
         <where>
             <if test="a_username!=null and a_username!='' ">
                 and  a_username like  '%${a_username}%'
@@ -55,6 +62,11 @@
     <select id="findAdminById"  parameterType="Integer" resultType="Admin" >
         select * from d_admin where a_id=#{a_id}
     </select>
+
+    <select id="getAll" resultType="Admin">
+        select * from d_admin;
+    </select>
+
     <!--修改管理员信息-->
     <update id="updateAdmin" parameterType="Admin">
         update d_admin

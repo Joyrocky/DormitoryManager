@@ -13,8 +13,8 @@
             <if test="c_counsellor!=null and c_counsellor!=''">
                 and  c_counsellor like  '%${c_counsellor}%'
             </if>
-            <if test="s_classid!=null and s_classid!=0">
-                and  s_classid like  '%${s_classid}%'
+            <if test="c_classid!=null and c_classid!=0">
+                and  c_classid like  '%${c_classid}%'
             </if>
         </where>
         ORDER BY  c_id asc
@@ -22,7 +22,7 @@
     </select>
     <!--查询数据总数-->
     <select id="totalCount"  resultType="Integer">
-        select count(s_classid) from d_class
+        select count(c_id) from d_class
         <where>
             <if test="c_classname!=null and c_classname!='' ">
                 and  c_classname like  '%${c_classname}%'
@@ -30,8 +30,8 @@
             <if test="c_counsellor!=null and c_counsellor!=''">
                 and  c_counsellor like  '%${c_counsellor}%'
             </if>
-            <if test="s_classid!=null and s_classid!=0">
-                and  s_classid like  '%${s_classid}%'
+            <if test="c_classid!=null and c_classid!=0">
+                and  c_classid like  '%${c_classid}%'
             </if>
           </where>
     </select>
@@ -42,8 +42,8 @@
     </delete>
     <!--添加班级信息-->
     <insert id="addClass" parameterType="Class" keyProperty="c_id" useGeneratedKeys="true">
-        insert into d_class (s_classid,c_classname,c_counsellor)
-        values(#{s_classid},#{c_classname},#{c_counsellor})
+        insert into d_class (c_classid,c_classname,c_counsellor)
+        values(#{c_classid},#{c_classname},#{c_counsellor})
     </insert>
 
     <select id="findClassById"  parameterType="Integer" resultType="Class" >
@@ -53,8 +53,8 @@
     <update id="updateClass" parameterType="Class">
         update d_class
         <set>
-            <if test="s_classid!=null and s_classid!=0">
-                s_classid=#{s_classid},
+            <if test="c_classid!=null and c_classid!=0">
+                c_classid=#{c_classid},
             </if>
             <if test="c_classname !=null and c_classname !=''">
                 c_classname=#{c_classname},
@@ -66,28 +66,40 @@
         where c_id = #{c_id}
     </update>
 
-
+    <!--Mybatis使用Collection进行表关联查询关联一对多数据类型(class为一，student为多)，且需要有id-->
+    <!--Association关联一对一类型-->
     <!--班级人员信息查询信息-->
     <resultMap type="com.itheima.po.Class" id="cardAndInfo2">
-        <id property="s_classid" column="s_classid"/>
+        <id property="c_id" column="c_id"/>
+        <result property="c_classid" column="c_classid"/>
         <result property="c_classname" column="c_classname"/>
-        <result property="d_bedtotal" column="d_bedtotal"/>
         <result property="c_counsellor" column="c_counsellor"/>
-        <association property="students" javaType="Student" >
-            <id property="s_studentid" column="s_studentid"/>
+        <collection property="students" ofType="com.itheima.po.Student" javaType="ArrayList">
+            <id property="s_id" column="s_id"/>
+            <result property="s_studentid" column="s_studentid"/>
             <result property="s_name" column="s_name"/>
             <result property="s_sex" column="s_sex"/>
             <result property="s_age" column="s_age"/>
             <result property="s_phone" column="s_phone"/>
             <result property="s_classid" column="s_classid"/>
+            <result property="s_classname" column="s_classname"/>
             <result property="s_dormitoryid" column="s_dormitoryid"/>
-        </association>
+        </collection>
     </resultMap>
 
+    <!--SQL选择属性与构造的resultMap属性名要一致-->
     <select id="findClassStudent" parameterType="Class" resultMap="cardAndInfo2">
-        SELECT uclass.*,students.*
-        FROM d_class uclass,d_student students
-        WHERE uclass.s_classid = students.s_classid
-        and uclass.s_classid like '${s_classid}'
+        SELECT uclass.c_id as c_id,uclass.c_classid as c_classid,uclass.c_classname as c_classname,uclass.c_counsellor as c_counsellor,
+        student.s_id as s_id,student.s_studentid as s_studentid,student.s_name as s_name,student.s_sex as s_sex,student.s_age as s_age,
+        student.s_phone as s_phone,student.s_classid as s_classid,student.s_classname as s_classname,student.s_dormitoryid as s_dormitoryid
+        FROM d_class uclass join d_student student
+        on uclass.c_classid = student.s_classid
+        and uclass.c_classname = student.s_classname
+        where uclass.c_classid = #{c_classid}
+        and uclass.c_classname = #{c_classname}
+    </select>
+
+    <select id="getAll" resultType="Class">
+        select * from d_class;
     </select>
 </mapper>

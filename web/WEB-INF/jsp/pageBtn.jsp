@@ -9,7 +9,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>Title</title>
+    <title>后台登录</title>
     <link rel="stylesheet" href="/css/pg_btn.css">
     <script type="text/javascript" src="./js/jquery-1.3.2.min.js"></script>
     <script src="lib/layui/layui.js"></script>

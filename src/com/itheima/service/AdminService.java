@@ -11,6 +11,10 @@ import java.util.List;
 public interface AdminService {
 	// 通过账号和密码查询用户
 	public Admin findAdmin(Admin admin);
+
+	//找到所有所有数据
+	public List<Admin> getAll();
+
 	//分页查询
 	public PageInfo<Admin> findPageInfo(String a_username, String a_describe,Integer a_id, Integer pageIndex, Integer pageSize);
 

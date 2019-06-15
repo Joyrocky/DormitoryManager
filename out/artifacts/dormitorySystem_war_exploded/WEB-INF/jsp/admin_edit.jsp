@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>修改信息</title>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/images/favicon.ico" sizes="32x32" />
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/xadmin.css">
     <link rel="stylesheet" href="/css/pg_btn.css">
@@ -22,8 +22,9 @@
 <body>
 
 <div class="x-body">
-    <form class="layui-form"  id="f_auto" action="/updateAdmin" method="post" >
-        <input type="hidden" value="${sessionScope.a.a_id}" name="a_id" id="a_id"/>
+    <%--把表单封装成一个Admin对象传给服务端--%>
+    <form class="layui-form"  id="f_auto" action="/updateAdmin" method="post">
+        <input type="hidden" value="${sessionScope.a.a_id}" name="a_id" id="a_id" class="layui-input"/>
         <div class="layui-form-item">
             <label for="a_username" class="layui-form-label">
                 <span class="">用户名</span>
@@ -39,7 +40,7 @@
                 <span class="">密码</span>
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="a_password" name="a_password"
+                <input type="password" id="a_password" name="a_password"
                        autocomplete="off" value="${sessionScope.a.a_password}" class="layui-input">
             </div>
         </div>
@@ -86,7 +87,7 @@
 
 
         <div class="layui-form-item" id="btn_xg">
-            <button  class="layui-btn" id="btn_on"  lay-submit="" lay-filter="updateClass">
+            <button  class="layui-btn" id="btn_on"  lay-submit="" lay-filter="updateAdmin">
                 修改
             </button>
         </div>
@@ -94,7 +95,36 @@
 </div>
 
 <script>
-
+    // layui.use(['form','layer','laydate'], function(){
+    //     var form = layui.form,
+    //         $ = layui.jquery,
+    //         laydate = layui.laydate;
+    //
+    //     $("#f_auto")[0].reset();
+    //     form.on('submit(updateAdmin)', function(data) {
+    //
+    //         var param=data.field;
+    //
+    //         $.ajax({
+    //             url: '/updateAdmin',
+    //             type: "post",
+    //             data: JSON.stringify(param),
+    //             contentType: "application/json; charset=utf-8",
+    //             success:function(){
+    //                 console.log(data);
+    //                 layer.msg('修改成功', {icon: 1, time: 3000});
+    //                 setTimeout(function () {window.location.href='/findAdmin';},2000);
+    //
+    //             },
+    //             error:function(){
+    //                 console.log(data);
+    //                 layer.msg('修改失败',{icon:0,time:3000});
+    //                 setTimeout(function () {window.location.href='/findAdmin';},2000);
+    //             }
+    //         });
+    //     })
+    //
+    // });
 </script>
 </body>
 </html>

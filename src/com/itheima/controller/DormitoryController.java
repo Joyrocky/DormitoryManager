@@ -31,11 +31,23 @@ public class DormitoryController {
 	 * pageSize  显示条数
 	 */
 	@RequestMapping(value = "/findDormitory")
-	public String findDormitory(String d_name, String a_name,Integer s_dormitoryid, Integer pageIndex, Integer pageSize, Model model) {
+	public String findDormitory(String a_name,Integer s_dormitoryid,String d_dormbuilding,
+								Integer pageIndex, Integer pageSize, Model model) {
 
-	  PageInfo<Dormitory> di = dormitoryService.findPageInfo(d_name,a_name,s_dormitoryid,pageIndex,pageSize);
+	  PageInfo<Dormitory> di = dormitoryService.findPageInfo(a_name,s_dormitoryid,
+			  d_dormbuilding,pageIndex,pageSize);
 	  model.addAttribute("di",di);
 		return "dormitory_list";
+	}
+
+	/**
+	 * 导出Excel
+	 */
+	@RequestMapping(value = "/exportdormitorylist", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Dormitory> exportDormitory(){
+		List<Dormitory> dormitoryList = dormitoryService.getAll();
+		return dormitoryList;
 	}
 
 	/**
